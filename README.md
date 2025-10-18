@@ -1,1 +1,1 @@
-# registro-festival-de-juventudes
+# registro-festival-academico
