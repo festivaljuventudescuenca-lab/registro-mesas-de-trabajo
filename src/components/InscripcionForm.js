@@ -20,8 +20,7 @@ const InscripcionForm = () => {
   });  
   const [errors, setErrors] = useState({});  
   const [loading, setLoading] = useState(false);  
-  const [success, setSuccess] = useState(false);  
-  const [showVerifiedPopup, setShowVerifiedPopup] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const provincias = [  
     'Azuay', 'Bolívar', 'Cañar', 'Carchi', 'Chimborazo', 'Cotopaxi', 'El Oro',  
@@ -155,8 +154,8 @@ const InscripcionForm = () => {
       }
 
   setSuccess(true);
-  // Mostrar popup informativo sobre verificación y grupo de WhatsApp
-  setShowVerifiedPopup(true);
+  // Redirigir a la pantalla de acreditación en vez de mostrar popup
+  try { window.location.hash = '#acreditacion'; } catch (e) { /* noop en entornos sin window */ }
       // Limpiar formulario
   setFormData({ Nombres: '', Apellidos: '', Cedula: '', Edad: '', Provincia: '', Canton: '', Barrio: '', Email: '', Celular: '', Motivacion: '', MesaSelected: '', RazonMesa: '' });
       setErrors({});
@@ -229,18 +228,7 @@ const InscripcionForm = () => {
           Nueva inscripción  
         </motion.button>  
         
-        {showVerifiedPopup && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center">
-            <div className="absolute inset-0 bg-black/50" />
-            <div className="relative bg-white dark:bg-slate-900 rounded-lg p-6 max-w-lg mx-4 shadow-lg z-10">
-              <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2">Información importante</h3>
-              <p className="text-slate-700 dark:text-slate-300">Una vez verificado el pago, te enviaremos la información por correo electrónico y serás agregado al grupo de WhatsApp del evento.</p>
-              <div className="mt-4 flex justify-end">
-                <button onClick={() => setShowVerifiedPopup(false)} className="bg-primary text-white px-4 py-2 rounded-md">Entendido</button>
-              </div>
-            </div>
-          </div>
-        )}
+        {/* Popup eliminado: ahora redirigimos a la pantalla de acreditación */}
       </motion.div>  
     );  
   }  

@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import InscripcionForm from './components/InscripcionForm';
 import './styles.css';
 import logo from './img/logo.png'; // importa la imagen
 import fondo from './img/fondo.png'; // importa la imagen de fondo
+import Acreditacion from './components/Acreditacion';
 const App = () => {
+  const [hash, setHash] = useState(typeof window !== 'undefined' ? window.location.hash : '');
+
+  useEffect(() => {
+    const onHash = () => setHash(window.location.hash || '');
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+
+  // Si la ruta hash es #acreditacion, renderizamos la pantalla de acreditación
+  if (hash === '#acreditacion') {
+    return <Acreditacion />;
+  }
+
   return (
     <div className="relative flex min-h-screen w-full flex-col font-display group/design-root overflow-x-hidden" style={{ backgroundImage: `url(${fondo})` }}>
       <header className="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
